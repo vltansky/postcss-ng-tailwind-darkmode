@@ -7,13 +7,13 @@
 [PostCSS] plugin to force work angular emulated encapsulation with tailwind darkmode based on class.
 
 ```css
-.dark[_ng-content-1] .test[_ng-content-1] {
+.dark .test {
   color: red;
 }
 ```
-
+transforms to:
 ```css
-.dark .test[_ng-content-1] {
+.dark .test, :host-context(.dark) .test {
   color: red;
 }
 ```
