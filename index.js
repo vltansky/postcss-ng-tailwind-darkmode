@@ -2,10 +2,12 @@ module.exports = () => {
   return {
     postcssPlugin: 'postcss-ng-tailwind-dark',
     Rule: rule => {
-      rule.selector = rule.selector.replace(
-        /\.dark\[_ng-content[^\]]*]/gi,
-        '.dark'
-      )
+      if(rule.selector.includes('.dark ')){
+        rule.selectors = rule.selectors.map(v=>v.replace(
+          /\^\.dark(\s+)/gi,
+          ':host-context(.dark)$1'
+        ));
+        }
     }
   }
 }
